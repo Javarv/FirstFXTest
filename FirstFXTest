@@ -1,0 +1,67 @@
+package javafx_test;
+
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.Light.Point;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+public class JavaFX_Test extends Application{
+       static int x=10;
+
+    @Override
+    public void start(Stage primaryStage) throws InterruptedException{
+        primaryStage.setTitle("ПЕрвое FX !");
+        FlowPane root=new FlowPane(10,10);//Встановлює відступи по горизонталі та вертикалі
+        root.setAlignment(Pos.CENTER);
+        Scene scene1=new Scene(root,500,500);
+        primaryStage.setScene(scene1);   
+        Button button1= new Button("1st Button");
+        Button button2= new Button("2nd Button");
+        Button button3= new Button("Зміна кольору");
+        Label label1=new Label("Обери кнопку");
+        Label label2=new Label();
+        Canvas canvas1=new Canvas(250, 200);   
+        GraphicsContext gc = canvas1.getGraphicsContext2D();
+               gc.fillRect(10, 10, 150, 40);
+               
+         
+               
+     
+        root.getChildren().add(label1);
+        root.getChildren().add(button1);
+        root.getChildren().add(button2);
+        root.getChildren().add(label2);
+        root.getChildren().add(canvas1);
+        root.getChildren().add(button3);
+        
+        button1.setOnAction((e) -> { label2.setText(button1.getText()); });
+        button2.setOnAction((e) -> { label2.setText(button2.getText()); });
+       button3.setOnAction((e) -> {     gc.setFill(Color.AQUAMARINE);
+                                        gc.setStroke(Color.YELLOW);    }       );
+//         x+=10; y+=10;
+//         gc.fillRect(x, y, 150, 40);
+                           
+Button button4 = new Button("Сделать вибор");
+button4.setOnAction(e->{ boolean res=ModalConfirmWindow.confrm();
+                            System.out.println(res);                        
+                                                });
+root.getChildren().add(button4);      
+        
+      
+        
+        primaryStage.show();
+            }    
+    
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
